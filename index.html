@@ -29,7 +29,7 @@
     // +++ Define the middleware function+++
     var disableForwardScrubbing = function(player) {
       return {
-        // +++ Set the source to use any tech +++
+        // +++ Implement setSource() +++
         setSource: function setSource(srcObj, next) {
           next(null, srcObj);
         },

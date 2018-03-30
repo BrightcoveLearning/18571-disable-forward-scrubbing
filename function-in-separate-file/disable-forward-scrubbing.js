@@ -5,7 +5,7 @@ var disableForwardScrubbbing = function(player) {
     setSource: function setSource(srcObj, next) {
       next(null, srcObj);
     },
-    // +++ Alter the setCurrentTime function +++
+    // +++ Alter the setCurrentTime method +++
     setCurrentTime: function setCurrentTime(ct) {
       // Check if the time scrubbed to is less than the current time
       if ( ct < player.currentTime() ) {

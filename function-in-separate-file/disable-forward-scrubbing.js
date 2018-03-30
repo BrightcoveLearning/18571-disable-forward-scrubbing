@@ -1,5 +1,5 @@
 // +++ Define the middleware function+++
-var disableForwardScrubbbing = function(player) {
+var disableForwardScrubbing = function(player) {
   return {
     // +++ Set the source to use any tech +++
     setSource: function setSource(srcObj, next) {
@@ -7,14 +7,18 @@ var disableForwardScrubbbing = function(player) {
     },
     // +++ Alter the setCurrentTime method +++
     setCurrentTime: function setCurrentTime(ct) {
-      // Check if the time scrubbed to is less than the current time
-      if ( ct < player.currentTime() ) {
-        // If time scrubbed to less than current time go back to the spot
+      var percentAllowForward = 50,
+       // Determine percentage of video played
+       percentPlayed = player.currentTime() / player.duration() * 100;
+       // Check if the time scrubbed to is less than the current time
+       // or if passed scrub forward percentage
+      if ( ct < player.currentTime() || percentPlayed > percentAllowForward ) {
+        // If true, move playhead to desired time
         return ct;
-      } else {
-        // If time scrubbed to is past current time, leave playhead at current time
-        return player.currentTime();
       }
+      // If time scrubbed to is past current time and not passed percentage
+      // leave playhead at current time
+      return player.currentTime();
     }
-  };
+  }
 };

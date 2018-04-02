@@ -22,3 +22,6 @@ var disableForwardScrubbing = function(player) {
     }
   }
 };
+
+// Register the middleware function with the players
+videojs.use('*', disableForwardScrubbing);
